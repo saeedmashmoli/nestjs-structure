@@ -12,5 +12,5 @@ export class CreatePetInput {
 	type?: string;
 
 	@Field(() => Int)
-	ownerId
+	ownerId: number
 }

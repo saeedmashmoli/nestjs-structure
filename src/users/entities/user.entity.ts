@@ -5,7 +5,7 @@ import {  PrimaryGeneratedColumn,Column, ManyToOne, Entity } from 'typeorm';
 
 @Entity()
 @ObjectType()
-export class Pet {
+export class User {
 
   	@PrimaryGeneratedColumn()
 	@Field(() => Int)
@@ -15,16 +15,23 @@ export class Pet {
 	@Field()
 	name: string;
 
-	@Column({nullable: true})
+    @Column()
 	@Field({nullable: true})
-	type?: string;
+	username?: string;
+
+    @Column()
+	@Field({nullable: true})
+	mobile?: string;
+
+    @Column()
+    @Field()
+    password: string;
 
 	@Column()
 	@Field(() => Int)
-	ownerId: number;
+	roleId?: string;
 
 	@ManyToOne(() => Owner,owner => owner.pets)
 	@Field(() => Owner,{nullable: true})
 	owner?: Owner; 
 }
-

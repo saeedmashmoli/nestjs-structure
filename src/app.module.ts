@@ -6,6 +6,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { OwnersModule } from './owners/owners.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
+import { PermissionsModule } from './permissions/permissions.module';
 
 @Module({
   imports: [GraphQLModule.forRoot({
@@ -21,7 +25,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 		"entities": ["dist/**/*.entity.{ts,js}"],
 		// "entities": ['dist/*/.entity{.ts,.js}'],
 		"synchronize": true
-	}),PetsModule,OwnersModule],
+	}),PetsModule,OwnersModule, AuthModule, UsersModule, RolesModule, PermissionsModule],
   controllers: [AppController],
   providers: [AppService],
 })
