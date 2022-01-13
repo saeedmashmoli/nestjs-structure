@@ -10,7 +10,10 @@ import { Pet } from './entities/pet.entity';
 
 @Injectable()
 export class PetsService {
-  constructor(@InjectRepository(Pet) private petsRepository: Repository<Pet>,@InjectRepository(Pet) private ownerService: OwnersService) {};
+  constructor(
+    @InjectRepository(Pet) private petsRepository: Repository<Pet>,
+    @InjectRepository(Pet) private ownerService: OwnersService
+  ) {};
   getOwner(ownerId: number): Promise<Owner> {
     return this.ownerService.findOne(ownerId);
   }

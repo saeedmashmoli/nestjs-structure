@@ -9,7 +9,7 @@ import { Permission } from './entities/permission.entity';
 
 @Injectable()
 export class PermissionsService {
-  constructor(@InjectRepository(Permission) private permissionRepository: Repository<Permission>,@InjectRepository(Role) private roleService: RolesService) {};
+  constructor(@InjectRepository(Permission) private permissionRepository: Repository<Permission>) {};
 
   create(createPermissionInput: CreatePermissionInput) {
     const newPet = this.permissionRepository.create(createPermissionInput);

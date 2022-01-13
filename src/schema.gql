@@ -16,11 +16,39 @@ type Owner {
   pets: [Pet!]
 }
 
+type Role {
+  id: Int!
+  title: String!
+  label: String!
+}
+
+type User {
+  id: Int!
+  name: String!
+  username: String
+  mobile: String
+  password: String!
+  roleId: Int!
+  owner: Owner
+}
+
+type Permission {
+  id: Int!
+  title: String!
+  label: String!
+}
+
 type Query {
   pets: [Pet!]!
   pet(id: Int!): Pet!
   owners: [Owner!]!
   owner(id: Int!): Owner!
+  users: [User!]!
+  user(id: Int!): User!
+  roles: [Role!]!
+  role(id: Int!): Role!
+  permissions: [Permission!]!
+  permission(id: Int!): Permission!
 }
 
 type Mutation {
@@ -30,6 +58,12 @@ type Mutation {
   createOwner(createOwnerInput: CreateOwnerInput!): Owner!
   updateOwner(updateOwnerInput: UpdateOwnerInput!): Owner!
   removeOwner(id: Int!): Owner!
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  updateRole(updateRoleInput: UpdateRoleInput!): Role!
+  removeRole(id: Int!): Role!
+  createPermission(createPermissionInput: CreatePermissionInput!): Permission!
+  updatePermission(updatePermissionInput: UpdatePermissionInput!): Permission!
+  removePermission(id: Int!): Permission!
 }
 
 input CreatePetInput {
@@ -52,4 +86,26 @@ input CreateOwnerInput {
 input UpdateOwnerInput {
   name: String!
   id: Float!
+}
+
+input CreateRoleInput {
+  title: String!
+  label: String!
+}
+
+input UpdateRoleInput {
+  title: String
+  label: String
+  id: Int!
+}
+
+input CreatePermissionInput {
+  title: String!
+  label: String!
+}
+
+input UpdatePermissionInput {
+  title: String
+  label: String
+  id: Int!
 }

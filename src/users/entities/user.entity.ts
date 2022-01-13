@@ -29,7 +29,7 @@ export class User {
 
 	@Column()
 	@Field(() => Int)
-	roleId?: string;
+	roleId: number;
 
 	@ManyToOne(() => Owner,owner => owner.pets)
 	@Field(() => Owner,{nullable: true})

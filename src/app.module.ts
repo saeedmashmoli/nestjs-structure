@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PetsModule } from './pets/pets.module';
@@ -10,23 +10,26 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
+import { typeOrmAsyncConfig } from 'config/database.config';
+import { ConfigModule } from '@nestjs/config';
+import { loadTypeOrmConnectionFromEnv } from './loader';
+import { ConnectionOptionsEnvReader } from 'typeorm/connection/options-reader/ConnectionOptionsEnvReader';
+
 
 @Module({
-  imports: [GraphQLModule.forRoot({
+  imports: [
+	GraphQLModule.forRoot({
 		autoSchemaFile: join(process.cwd(),'src/schema.gql'),
 	}),
-	TypeOrmModule.forRoot({
-		"type": "mysql",
-		"host": "localhost",
-		"port": 3306,
-		"username": "root",
-		"password": "",
-		"database": "nest-test",
-		"entities": ["dist/**/*.entity.{ts,js}"],
-		// "entities": ['dist/*/.entity{.ts,.js}'],
-		"synchronize": true
-	}),PetsModule,OwnersModule, AuthModule, UsersModule, RolesModule, PermissionsModule],
-  controllers: [AppController],
-  providers: [AppService],
+	ConfigModule.forRoot(),
+	// TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
+	TypeOrmModule.forRootAsync({
+		useFactory: () => {
+			return loadTypeOrmConnectionFromEnv()
+		}
+	}),
+	PetsModule,OwnersModule, AuthModule, UsersModule, RolesModule, PermissionsModule],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule {}

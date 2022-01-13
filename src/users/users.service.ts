@@ -9,7 +9,10 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(User) private userRepository: Repository<User>,@InjectRepository(Role) private roleService: RolesService) {};
+    constructor(
+        @InjectRepository(User) private userRepository: Repository<User>,
+        @InjectRepository(User) private roleService: RolesService
+    ) {};
     getRole(roleId: number): Promise<Role> {
         return this.roleService.findOne(roleId);
     }
