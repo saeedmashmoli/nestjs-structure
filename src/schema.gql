@@ -2,6 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Permission {
+  id: Int!
+  title: String!
+  label: String!
+  roles: [Role!]!
+}
+
+type Role {
+  id: Int!
+  title: String!
+  label: String!
+  users: [User!]
+}
+
 type User {
   id: Int!
   name: String!
@@ -12,38 +26,7 @@ type User {
   role: Role
 }
 
-type Role {
-  id: Int!
-  title: String!
-  label: String!
-  users: [User!]
-}
-
-type Pet {
-  id: Int!
-  name: String!
-  type: String
-  ownerId: Int!
-  owner: Owner
-}
-
-type Owner {
-  id: Int!
-  name: String!
-  pets: [Pet!]
-}
-
-type Permission {
-  id: Int!
-  title: String!
-  label: String!
-}
-
 type Query {
-  pets: [Pet!]!
-  pet(id: Int!): Pet!
-  owners: [Owner!]!
-  owner(id: Int!): Owner!
   users: [User!]!
   user(id: Int!): User!
   roles: [Role!]!
@@ -53,43 +36,15 @@ type Query {
 }
 
 type Mutation {
-  createPet(createPetInput: CreatePetInput!): Pet!
-  updatePet(updatePetInput: UpdatePetInput!): Pet!
-  removePet(id: Int!): Pet!
-  createOwner(createOwnerInput: CreateOwnerInput!): Owner!
-  updateOwner(updateOwnerInput: UpdateOwnerInput!): Owner!
-  removeOwner(id: Int!): Owner!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
-  createRole(createRoleInput: CreateRoleInput!): Role!
-  updateRole(updateRoleInput: UpdateRoleInput!): Role!
+  createRole(permissionIds: [Int!]!, createRoleInput: CreateRoleInput!): Role!
+  updateRole(permissionIds: [Int!]!, updateRoleInput: UpdateRoleInput!): Role!
   removeRole(id: Int!): Role!
   createPermission(createPermissionInput: CreatePermissionInput!): Permission!
   updatePermission(updatePermissionInput: UpdatePermissionInput!): Permission!
   removePermission(id: Int!): Permission!
-}
-
-input CreatePetInput {
-  name: String!
-  type: String
-  ownerId: Int!
-}
-
-input UpdatePetInput {
-  name: String!
-  type: String
-  ownerId: Int!
-  id: Float!
-}
-
-input CreateOwnerInput {
-  name: String!
-}
-
-input UpdateOwnerInput {
-  name: String!
-  id: Float!
 }
 
 input CreateUserInput {

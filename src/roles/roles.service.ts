@@ -13,9 +13,17 @@ export class RolesService {
     @InjectRepository(Role) private permissionReposity: Repository<Permission>
     ) {};
 
-  create(createRoleInput: CreateRoleInput) {
-    const newPet = this.roleRepository.create(createRoleInput);
-		return this.roleRepository.save(newPet);
+  create(createRoleInput: CreateRoleInput,permissionIds: any) {
+    const newRole = this.roleRepository.create(createRoleInput);
+    if(permissionIds.length > 0){
+      permissionIds.forEach( async (permissionId) => {
+        const permission = await this.permissionReposity.findOne(permissionId);
+        if(permission){
+          newRole.addPermission(permission)
+        }
+      })
+    }
+		return this.roleRepository.save(newRole);
   }
 
   async findAll() {
@@ -26,7 +34,16 @@ export class RolesService {
     return this.roleRepository.findOneOrFail(id);
   }
 
-  update(id: number, updateRoleInput: UpdateRoleInput) {
+  async update(id: number, updateRoleInput: UpdateRoleInput,permissionIds: any) {
+    const role = await this.roleRepository.findOne(id);
+    if(permissionIds.length > 0){
+      permissionIds.forEach( async (permissionId) => {
+        const permission = await this.permissionReposity.findOne(permissionId);
+        if(permission){
+          role.addPermission(permission)
+        }
+      })
+    }
     return this.roleRepository.update(id,updateRoleInput);
   }
 

@@ -1,5 +1,4 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Owner } from 'src/owners/entities/owner.entity';
 import { Role } from 'src/roles/entities/role.entity';
 import {  PrimaryGeneratedColumn,Column, ManyToOne, Entity } from 'typeorm';
 

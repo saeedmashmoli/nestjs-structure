@@ -10,12 +10,8 @@ import { User } from './entities/user.entity';
 @Injectable()
 export class UsersService {
     constructor(
-        @InjectRepository(User) private userRepository: Repository<User>,
-        @InjectRepository(User) private roleService: RolesService
+        @InjectRepository(User) private userRepository: Repository<User>
     ) {};
-    getRole(roleId: number): Promise<Role> {
-        return this.roleService.findOne(roleId);
-    }
     create(createUserInput: CreateUserInput) {
         const newUser = this.userRepository.create(createUserInput);
         return this.userRepository.save(newUser);

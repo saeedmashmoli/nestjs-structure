@@ -1,10 +1,8 @@
-import { Inject, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PetsModule } from './pets/pets.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { OwnersModule } from './owners/owners.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
@@ -12,8 +10,6 @@ import { PermissionsModule } from './permissions/permissions.module';
 import { ConfigModule } from '@nestjs/config';
 import { loadTypeOrmConnectionFromEnv } from './loader';
 import { AuthModule } from './auth/auth.module';
-import { UsersService } from './users/users.service';
-import { CaslModule } from './casl/casl.module';
 
 
 @Module({
@@ -28,7 +24,7 @@ import { CaslModule } from './casl/casl.module';
 			return loadTypeOrmConnectionFromEnv()
 		}
 	}),
-	PetsModule,OwnersModule, UsersModule, RolesModule, PermissionsModule, AuthModule, CaslModule],
+	UsersModule, RolesModule, PermissionsModule, AuthModule],
 	controllers: [AppController],
 	providers: [AppService],
 })

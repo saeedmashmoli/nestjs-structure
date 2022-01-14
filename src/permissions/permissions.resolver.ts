@@ -14,12 +14,12 @@ export class PermissionsResolver {
   }
 
   @Query(() => [Permission], { name: 'permissions' })
-  findAll() {
+  getPermissions() {
     return this.permissionsService.findAll();
   }
 
   @Query(() => Permission, { name: 'permission' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  getPermission(@Args('id', { type: () => Int }) id: number) {
     return this.permissionsService.findOne(id);
   }
 
