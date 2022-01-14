@@ -13,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
 import { loadTypeOrmConnectionFromEnv } from './loader';
 import { AuthModule } from './auth/auth.module';
 import { UsersService } from './users/users.service';
+import { CaslModule } from './casl/casl.module';
 
 
 @Module({
@@ -27,7 +28,7 @@ import { UsersService } from './users/users.service';
 			return loadTypeOrmConnectionFromEnv()
 		}
 	}),
-	PetsModule,OwnersModule, UsersModule, RolesModule, PermissionsModule, AuthModule],
+	PetsModule,OwnersModule, UsersModule, RolesModule, PermissionsModule, AuthModule, CaslModule],
 	controllers: [AppController],
 	providers: [AppService],
 })
