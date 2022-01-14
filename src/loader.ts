@@ -11,8 +11,8 @@ export const loadTypeOrmConnectionFromEnv = async (): Promise<TypeOrmModuleOptio
     const envReader = new ConnectionOptionsEnvReader();
     const connectionOptions: TypeOrmModuleOptions = {
         ...(await envReader.read())[0],
-        entities: [`${__dirname}/${process.env.TYPEORM_ENTITIES}`],
-        migrations: []
+        entities: [process.env.TYPEORM_ENTITIES],
+        migrations: [],
     }
     return connectionOptions;
 }

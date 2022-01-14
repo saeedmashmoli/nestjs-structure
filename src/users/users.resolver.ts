@@ -9,7 +9,7 @@ export class UsersResolver {
     constructor(private readonly usersService: UsersService) {}
 
     @Mutation(() => User)
-    createRole(@Args('createUserInput') createUserInput: CreateUserInput) {
+    createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
         return this.usersService.create(createUserInput);
     }
 
@@ -24,12 +24,12 @@ export class UsersResolver {
     }
 
     @Mutation(() => User)
-    updateRole(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
         return this.usersService.update(updateUserInput.id, updateUserInput);
     }
 
     @Mutation(() => User)
-    removeRole(@Args('id', { type: () => Int }) id: number) {
+    removeUser(@Args('id', { type: () => Int }) id: number) {
         return this.usersService.remove(id);
     }
 }

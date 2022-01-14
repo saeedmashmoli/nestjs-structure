@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Permission } from 'src/permissions/entities/permission.entity';
 import { Repository } from 'typeorm';
 import { CreateRoleInput } from './dto/create-role.input';
 import { UpdateRoleInput } from './dto/update-role.input';
@@ -7,7 +8,10 @@ import { Role } from './entities/role.entity';
 
 @Injectable()
 export class RolesService {
-  constructor(@InjectRepository(Role) private roleRepository: Repository<Role>) {};
+  constructor(
+    @InjectRepository(Role) private roleRepository: Repository<Role>,
+    @InjectRepository(Role) private permissionReposity: Repository<Permission>
+    ) {};
 
   create(createRoleInput: CreateRoleInput) {
     const newPet = this.roleRepository.create(createRoleInput);

@@ -2,6 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: Int!
+  name: String!
+  username: String
+  mobile: String
+  password: String!
+  roleId: Int!
+  role: Role
+}
+
+type Role {
+  id: Int!
+  title: String!
+  label: String!
+  users: [User!]
+}
+
 type Pet {
   id: Int!
   name: String!
@@ -14,22 +31,6 @@ type Owner {
   id: Int!
   name: String!
   pets: [Pet!]
-}
-
-type Role {
-  id: Int!
-  title: String!
-  label: String!
-}
-
-type User {
-  id: Int!
-  name: String!
-  username: String
-  mobile: String
-  password: String!
-  roleId: Int!
-  owner: Owner
 }
 
 type Permission {
@@ -58,6 +59,9 @@ type Mutation {
   createOwner(createOwnerInput: CreateOwnerInput!): Owner!
   updateOwner(updateOwnerInput: UpdateOwnerInput!): Owner!
   removeOwner(id: Int!): Owner!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
   createRole(createRoleInput: CreateRoleInput!): Role!
   updateRole(updateRoleInput: UpdateRoleInput!): Role!
   removeRole(id: Int!): Role!
@@ -86,6 +90,23 @@ input CreateOwnerInput {
 input UpdateOwnerInput {
   name: String!
   id: Float!
+}
+
+input CreateUserInput {
+  name: String!
+  username: String
+  roleId: Int!
+  mobile: String
+  password: String!
+}
+
+input UpdateUserInput {
+  name: String
+  username: String
+  roleId: Int
+  mobile: String
+  password: String
+  id: Int!
 }
 
 input CreateRoleInput {

@@ -6,14 +6,13 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { OwnersModule } from './owners/owners.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
-import { typeOrmAsyncConfig } from 'config/database.config';
 import { ConfigModule } from '@nestjs/config';
 import { loadTypeOrmConnectionFromEnv } from './loader';
-import { ConnectionOptionsEnvReader } from 'typeorm/connection/options-reader/ConnectionOptionsEnvReader';
+import { AuthModule } from './auth/auth.module';
+import { UsersService } from './users/users.service';
 
 
 @Module({
@@ -28,7 +27,7 @@ import { ConnectionOptionsEnvReader } from 'typeorm/connection/options-reader/Co
 			return loadTypeOrmConnectionFromEnv()
 		}
 	}),
-	PetsModule,OwnersModule, AuthModule, UsersModule, RolesModule, PermissionsModule],
+	PetsModule,OwnersModule, UsersModule, RolesModule, PermissionsModule, AuthModule],
 	controllers: [AppController],
 	providers: [AppService],
 })

@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Owner } from 'src/owners/entities/owner.entity';
+import { Role } from 'src/roles/entities/role.entity';
 import {  PrimaryGeneratedColumn,Column, ManyToOne, Entity } from 'typeorm';
 
 
@@ -31,7 +32,7 @@ export class User {
 	@Field(() => Int)
 	roleId: number;
 
-	@ManyToOne(() => Owner,owner => owner.pets)
-	@Field(() => Owner,{nullable: true})
-	owner?: Owner; 
+	@ManyToOne(() => Role,role => role.users)
+	@Field(() => Role,{nullable: true})
+	role?: Role; 
 }
